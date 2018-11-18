@@ -33,7 +33,7 @@ class Login extends PureComponent {
       {
         key: 'github',
         title: <Icon type="github" />,
-        href: 'https://github.com/zuiidea/antd-admin',
+        href: '',
         blankTarget: true,
       },
     ]
@@ -94,7 +94,7 @@ class Login extends PureComponent {
               >
                 <Trans>Sign in</Trans>
               </Button>
-              <p>
+              {/* <p>
                 <span>
                   <Trans>Username</Trans>
                   ：guest
@@ -103,7 +103,7 @@ class Login extends PureComponent {
                   <Trans>Password</Trans>
                   ：guest
                 </span>
-              </p>
+              </p> */}
             </Row>
           </form>
         </div>

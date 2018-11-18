@@ -11,12 +11,10 @@ import styles from './Sider.less'
 class Sider extends PureComponent {
   render() {
     const {
-      i18n,
       menus,
       theme,
       isMobile,
       collapsed,
-      onThemeChange,
       onCollapseChange,
     } = this.props
 
@@ -54,7 +52,7 @@ class Sider extends PureComponent {
             />
           </ScrollBar>
         </div>
-        {collapsed ? null : (
+        {/* {collapsed ? null : (
           <div className={styles.switchTheme}>
             <span>
               <Icon type="bulb" />
@@ -70,7 +68,7 @@ class Sider extends PureComponent {
               unCheckedChildren={i18n.t`Light`}
             />
           </div>
-        )}
+        )} */}
       </Layout.Sider>
     )
   }
