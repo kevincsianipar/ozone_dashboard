@@ -26,23 +26,11 @@ const TwoColProps = {
 @withI18n()
 @Form.create()
 class Filter extends PureComponent {
-  handleFields = fields => {
-    const { createTime } = fields
-    if (createTime.length) {
-      fields.createTime = [
-        moment(createTime[0]).format('YYYY-MM-DD'),
-        moment(createTime[1]).format('YYYY-MM-DD'),
-      ]
-    }
-    return fields
-  }
-
   handleSubmit = () => {
     const { onFilterChange, form } = this.props
     const { getFieldsValue } = form
 
     let fields = getFieldsValue()
-    fields = this.handleFields(fields)
     onFilterChange(fields)
   }
 
@@ -69,7 +57,6 @@ class Filter extends PureComponent {
 
     let fields = getFieldsValue()
     fields[key] = values
-    fields = this.handleFields(fields)
     onFilterChange(fields)
   }
 
@@ -77,14 +64,6 @@ class Filter extends PureComponent {
     const { onAdd, filter, form, i18n } = this.props
     const { getFieldDecorator } = form
     const { name, address } = filter
-
-    let initialCreateTime = []
-    if (filter.createTime && filter.createTime[0]) {
-      initialCreateTime[0] = moment(filter.createTime[0])
-    }
-    if (filter.createTime && filter.createTime[1]) {
-      initialCreateTime[1] = moment(filter.createTime[1])
-    }
 
     return (
       <Row gutter={24}>
@@ -115,29 +94,8 @@ class Filter extends PureComponent {
           )}
         </Col>
         <Col
-          {...ColProps}
-          xl={{ span: 6 }}
-          md={{ span: 8 }}
-          sm={{ span: 12 }}
-          id="createTimeRangePicker"
-        >
-          <FilterItem label={i18n.t`CreateTime`}>
-            {getFieldDecorator('createTime', {
-              initialValue: initialCreateTime,
-            })(
-              <RangePicker
-                style={{ width: '100%' }}
-                onChange={this.handleChange.bind(this, 'createTime')}
-                getCalendarContainer={() => {
-                  return document.getElementById('createTimeRangePicker')
-                }}
-              />
-            )}
-          </FilterItem>
-        </Col>
-        <Col
           {...TwoColProps}
-          xl={{ span: 10 }}
+          xl={{ span: 16 }}
           md={{ span: 24 }}
           sm={{ span: 24 }}
         >

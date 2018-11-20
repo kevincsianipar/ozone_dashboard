@@ -62,12 +62,13 @@ class Login extends PureComponent {
                 rules: [
                   {
                     required: true,
+                    type: 'email', message: 'Email tidak valid',
                   },
                 ],
               })(
                 <Input
                   onPressEnter={this.handleOk}
-                  placeholder={i18n.t`Username`}
+                  placeholder='Email'
                 />
               )}
             </FormItem>
@@ -107,9 +108,9 @@ class Login extends PureComponent {
             </Row>
           </form>
         </div>
-        <div className={styles.footer}>
+        {/* <div className={styles.footer}>
           <GlobalFooter links={footerLinks} copyright={config.copyright} />
-        </div>
+        </div> */}
       </Fragment>
     )
   }

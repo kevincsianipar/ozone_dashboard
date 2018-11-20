@@ -1,4 +1,4 @@
-import { Mock, Constant, qs, randomAvatar } from './_utils'
+import { Mock, Constant, qs, randomAvatar, randomCabang, randomNamaSupervisor } from './_utils';
 
 const { ApiPrefix } = Constant
 
@@ -7,13 +7,17 @@ let usersListData = Mock.mock({
     {
       id: '@id',
       name: '@name',
-      nickName: '@last',
-      phone: /^1[34578]\d{9}$/,
-      'age|11-99': 1,
-      address: '@county(true)',
+      cabang() {
+        return randomCabang()
+      },
+      NPP: /^[34578]\d{6}$/,
+      phone: /^08[157]\d{9}$/,
+      'age|20-40': 1,
       isMale: '@boolean',
       email: '@email',
-      createTime: '@datetime',
+      supervisor(){
+        return randomNamaSupervisor()
+      },
       avatar() {
         return randomAvatar()
       },
@@ -45,15 +49,15 @@ const userPermission = {
 const adminUsers = [
   {
     id: 0,
-    username: 'admin',
+    username: 'admin@bni.com',
     password: 'admin',
     permissions: userPermission.ADMIN,
     avatar: randomAvatar(),
   },
   {
     id: 1,
-    username: 'guest',
-    password: 'guest',
+    username: 'test@bni.com',
+    password: 'test',
     permissions: userPermission.DEFAULT,
     avatar: randomAvatar(),
   },
@@ -182,7 +186,7 @@ module.exports = {
   },
 
   [`POST ${ApiPrefix}/users/delete`](req, res) {
-    const { ids=[] } = req.body
+    const { ids = [] } = req.body
     database = database.filter(item => !ids.some(_ => _ === item.id))
     res.status(204).end()
   },

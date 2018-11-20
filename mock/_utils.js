@@ -5,6 +5,9 @@
  * @param   {string}        value   The value of the object that needs to be queried.
  * @return  {object|undefined}   Return frist object when query success.
  */
+import dataCabang from './cabangBNI.json'
+import namaSupervisor from './namaSupervisor.json'
+
 export function queryArray(array, key, value) {
   if (!Array.isArray(array)) {
     return
@@ -33,7 +36,7 @@ export function randomAvatar() {
     'https://randomuser.me/api/portraits/men/43.jpg',
     'https://tinyfac.es/data/avatars/475605E3-69C5-4D2B-8727-61B7BB8C4699-500w.jpeg',
     'https://pbs.twimg.com/profile_images/943227488292962306/teiNNAiy.jpg',
-    'https://randomuser.me/api/portraits/men/46.jpg'
+    'https://randomuser.me/api/portraits/men/46.jpg',
   ]
   return avatarList[randomNumber(0, avatarList.length - 1)]
 }
@@ -60,3 +63,14 @@ export const Constant = {
 
 export Mock from 'mockjs'
 export qs from 'qs'
+
+export function randomCabang() {
+  const cabang = dataCabang
+  const r1 = randomNumber(0, dataCabang.length - 1)
+  return cabang[r1][randomNumber(0, dataCabang[r1].length - 1)]
+}
+
+export function randomNamaSupervisor() {
+  const nama = namaSupervisor
+  return nama[randomNumber(0, namaSupervisor.length - 1)]
+}

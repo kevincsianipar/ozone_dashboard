@@ -28,6 +28,11 @@ module.exports = {
         title: '中文',
         flag: '/china.svg',
       },
+      {
+        key: 'id',
+        title: 'Indonesia',
+        flag: '/indonesia.svg',
+      },
     ],
     defaultLanguage: 'en',
   },

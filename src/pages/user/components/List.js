@@ -25,12 +25,24 @@ class List extends PureComponent {
     }
   }
 
+  showCabangInfo = content => {
+    Modal.info({
+      title: `BNI ${content.LOCATION}`,
+      content: (
+        <div>
+          <p>Provinsi : {content.PROVINCE}</p>
+          <p>Provinsi : {content.PROVINCE}</p>
+        </div>
+      ),
+      onOk() {},
+    })
+  }
+
   render() {
     const { onDeleteItem, onEditItem, i18n, ...tableProps } = this.props
-
     const columns = [
       {
-        title: <Trans>Avatar</Trans>,
+        title: 'Foto',
         dataIndex: 'avatar',
         key: 'avatar',
         width: 72,
@@ -38,46 +50,43 @@ class List extends PureComponent {
         render: text => <Avatar style={{ marginLeft: 8 }} src={text} />,
       },
       {
-        title: <Trans>Name</Trans>,
+        title: 'NPP',
+        dataIndex: 'NPP',
+        key: 'NPP',
+      },
+      {
+        title: 'Nama JRM',
         dataIndex: 'name',
         key: 'name',
         render: (text, record) => <Link to={`user/${record.id}`}>{text}</Link>,
       },
       {
-        title: <Trans>NickName</Trans>,
-        dataIndex: 'nickName',
-        key: 'nickName',
+        title: 'Cabang Pemrosesan Kredit',
+        dataIndex: 'cabang.LOCATION',
+        key: 'cabang',
+        render: (text, record) => (
+          <span>BNI {text}</span>
+        ),
       },
       {
-        title: <Trans>Age</Trans>,
-        dataIndex: 'age',
-        key: 'age',
+        title: 'Provinsi',
+        dataIndex: 'cabang.PROVINCE',
+        key: 'cabang',
       },
       {
-        title: <Trans>Gender</Trans>,
-        dataIndex: 'isMale',
-        key: 'isMale',
-        render: text => <span>{text ? 'Male' : 'Female'}</span>,
-      },
-      {
-        title: <Trans>Phone</Trans>,
+        title: 'Telepon',
         dataIndex: 'phone',
         key: 'phone',
       },
       {
-        title: <Trans>Email</Trans>,
+        title: 'Email',
         dataIndex: 'email',
         key: 'email',
       },
       {
-        title: <Trans>Address</Trans>,
-        dataIndex: 'address',
-        key: 'address',
-      },
-      {
-        title: <Trans>CreateTime</Trans>,
-        dataIndex: 'createTime',
-        key: 'createTime',
+        title: <Trans>Supervisor</Trans>,
+        dataIndex: 'supervisor.Nama',
+        key: 'supervisor',
       },
       {
         title: <Trans>Operation</Trans>,
@@ -102,11 +111,10 @@ class List extends PureComponent {
         {...tableProps}
         pagination={{
           ...tableProps.pagination,
-          showTotal: total => i18n.t`Total ${total} Items`,
+          showTotal: total => `Total ${total} JRM`,
         }}
+        // dataSource={this.mockUser}
         className={styles.table}
-        bordered
-        scroll={{ x: 1200 }}
         columns={columns}
         simple
         rowKey={record => record.id}
